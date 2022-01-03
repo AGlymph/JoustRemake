@@ -4,14 +4,13 @@ using UnityEngine.InputSystem;
 public class InputHandler : MonoBehaviour, PlayerActions.IPlayerControlsActions
 {
     PlayerActions Actions;
-    public bool jumpedThisFrame{get; private set;}
+    public bool jumpPressed{get; private set;}
     public float moveValue{get; private set;}
 
     private void Awake()
     {
         Actions = new PlayerActions();
         Actions.PlayerControls.SetCallbacks(this);
-        Actions.Enable();
     }
 
     private void OnEnable() => Actions.Enable();
@@ -20,9 +19,8 @@ public class InputHandler : MonoBehaviour, PlayerActions.IPlayerControlsActions
     public void OnJump(InputAction.CallbackContext context)
     {
         if(context.started)
-            jumpedThisFrame = true;
+            jumpPressed = true;
         else if(context.canceled)
-            jumpedThisFrame = false;    
+            jumpPressed = false;      
     }
-   
 }
